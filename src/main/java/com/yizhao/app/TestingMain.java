@@ -43,41 +43,22 @@ public class TestingMain {
             //System.out.println(BigtableHelloWorld.create(connection));
             System.out.println(CreateTable.execute(connection, tableName, columnFaimilyName));
             Table table = connection.getTable(TableName.valueOf(tableName));
-            writeToBigTable2(table);
+
+            long startTime = System.nanoTime();
+
+            int count = 0;
+            for(int i = 0; i < totalIteration; i++){
+                byte[] columnQualifier = Bytes.toBytes(i);
+                InsertTable.execute(table, rowKey, columnFaimilyName, columnQualifier, String.valueOf(i).getBytes());
+            }
+            long endTime = System.nanoTime();
+
+            long duration = (endTime - startTime)/1000000; // in milliseconds
+            System.out.println("total time used for writing:" + duration + " milliseconds ,with count:" + count);
+
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-    public static void writeToBigTable2(Table table ) throws Exception{
-
-
-        long startTime = System.nanoTime();
-
-        int count = 0;
-        for(int i = 0; i < totalIteration; i++){
-
-
-            byte[] columnQualifier = Bytes.toBytes(i);
-            InsertTable.execute(table, rowKey, columnFaimilyName, columnQualifier, String.valueOf(i).getBytes());
-/*
-
-            System.out.println("cookie:" + cookieId);
-            byte[] result = ReadTable.execute(table, columnFaimilyName, columnQualifier);
-            // Parse byte array to Map
-            ByteArrayInputStream byteIn = new ByteArrayInputStream(result);
-            ObjectInputStream in = new ObjectInputStream(byteIn);
-            Map<Integer, String> data2 = (Map<Integer, String>) in.readObject();
-            System.out.println("cookie:" + cookieId + " ,ckvMap:" + data2.toString());
-*/
-
-            count ++;
-           // System.out.println("count:" + count);
-
-        }
-        long endTime = System.nanoTime();
-
-        long duration = (endTime - startTime)/1000000; // in milliseconds
-        System.out.println("total time used for writing:" + duration + " milliseconds ,with count:" + count);
     }
 
     public static void readBigTable() throws Exception{
