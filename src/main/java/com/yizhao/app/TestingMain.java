@@ -30,18 +30,18 @@ public class TestingMain {
     static Map<String, Map<Integer,KeyValueTs>> map = new HashMap<String, Map<Integer, KeyValueTs>>();
     static int totalIteration = 1000;
     static byte[] columnFaimilyName = "columnFaimilyName".getBytes();
-    static String bigtableTableName = "table17";
+    static String bigtableTableName = "table19";
     static byte[] rowKey = "rowKey".getBytes();
 
     public static void main(String[] args) throws Exception{
         ProcessCkvData.readThenWrite(map, "src/main/resources/20170712-004428.ps101-lax1.0000000000010309020.csv");
-        System.out.println(map.size());
+        System.out.println(map.size()); // 2154
 
-        //writeToBigTableInt();
-        //readBigTableInt();
+        // writeToBigTableInt(); // total time used for writing:52468 milliseconds ,with count:1000
+        // readBigTableInt(); // total time used for reading one bye one: 50 ~ 60 milliseconds
 
-        writeToBigTableCKVmap( );
-        //readBigTableMap();
+        // writeToBigTableCKVmap( ); // total time used for writing:107851 milliseconds ,with count:2154
+        readBigTableMap(); // total time used for reading one bye one:278 ~ 300 milliseconds
     }
 
 
