@@ -65,6 +65,7 @@ public class TestingMain {
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
                 out.writeObject(ckvMap);
                 InsertTable.execute(table, rowKey, columnFaimilyName, columnQualifier, byteOut.toByteArray());
+                count++;
             }
             long endTime = System.nanoTime();
 
