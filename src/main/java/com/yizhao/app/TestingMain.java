@@ -37,11 +37,11 @@ public class TestingMain {
         ProcessCkvData.readThenWrite(map, "src/main/resources/20170712-004428.ps101-lax1.0000000000010309020.csv");
         System.out.println(map.size());
 
-        //writeToBigTableInt();
-        //readBigTableInt();
+        writeToBigTableInt();
+        readBigTableInt();
 
-        writeToBigTableCKVmap( );
-        readBigTableMap();
+        //writeToBigTableCKVmap( );
+        //readBigTableMap();
     }
 
 
@@ -134,7 +134,7 @@ public class TestingMain {
         long startTime = System.nanoTime();
         for(String cookieId : map.keySet()) {
             byte[] columnQualifier = cookieId.getBytes();
-            ReadTable.executeReadingArowByItsKey(table, rowKey, columnFaimilyName, columnQualifier);
+            ReadTable.executeReadingArowByItsKeyMap(table, rowKey, columnFaimilyName, columnQualifier);
             // Parse byte array to Map
             // ByteArrayInputStream byteIn = new ByteArrayInputStream(result);
             //ObjectInputStream in = new ObjectInputStream(byteIn);
