@@ -30,17 +30,17 @@ public class TestingMain {
     static Map<String, Map<Integer,KeyValueTs>> map = new HashMap<String, Map<Integer, KeyValueTs>>();
     static int totalIteration = 1000;
     static byte[] columnFaimilyName = "columnFaimilyName".getBytes();
-    static String bigtableTableName = "table15";
+    static String bigtableTableName = "table17";
     static byte[] rowKey = "rowKey".getBytes();
 
     public static void main(String[] args) throws Exception{
         ProcessCkvData.readThenWrite(map, "src/main/resources/20170712-004428.ps101-lax1.0000000000010309020.csv");
         System.out.println(map.size());
 
-        writeToBigTableInt();
-        readBigTableInt();
+        //writeToBigTableInt();
+        //readBigTableInt();
 
-        //writeToBigTableCKVmap( );
+        writeToBigTableCKVmap( );
         //readBigTableMap();
     }
 
@@ -90,6 +90,7 @@ public class TestingMain {
             for(int i = 0; i < totalIteration; i++){
                 byte[] columnQualifier = Bytes.toBytes(i);
                 InsertTable.execute(table, rowKey, columnFaimilyName, columnQualifier, String.valueOf(i).getBytes());
+                count++;
             }
             long endTime = System.nanoTime();
 
