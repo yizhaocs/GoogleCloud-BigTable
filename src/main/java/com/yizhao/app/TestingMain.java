@@ -6,6 +6,9 @@ import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * build it:
@@ -22,6 +25,7 @@ import org.apache.hadoop.hbase.util.Bytes;
  */
 public class TestingMain {
 
+    static Map<String, Map<Integer,KeyValueTs>> map = new HashMap<String, Map<Integer, KeyValueTs>>();
     static int totalIteration = 1000;
     static byte[] columnFaimilyName = "columnFaimilyName".getBytes();
     static String bigtableTableName = "table14";
@@ -30,7 +34,6 @@ public class TestingMain {
     public static void main(String[] args) throws Exception{
         writeToBigTable( );
         readBigTable();
-
     }
 
 
